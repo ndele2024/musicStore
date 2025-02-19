@@ -1,0 +1,19 @@
+<h3 class="mt-2">Nouveautés</h3>
+<mat-divider></mat-divider>
+<div class="row">
+  @for (titre of newTitles; track $index){
+    <div class="col mt-4 mx-2">
+      <app-music-card [titre]="titre"></app-music-card>
+    </div>
+  }
+</div>
+
+<h3 class="mt-2">Musiques Populaires</h3>
+<mat-divider></mat-divider>
+<div class="row">
+  @for (titre of poularTitles; track $index){
+    <div class="col mt-4 mx-2">
+      <app-music-card [titre]="titre"></app-music-card>
+    </div>
+  }
+</div>

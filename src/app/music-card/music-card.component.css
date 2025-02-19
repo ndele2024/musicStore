@@ -1,0 +1,14 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.example-card:hover{
+  background-color: lightgreen;
+  transform: scale(115%);
+  transition: 150ms ease-in-out;
+}

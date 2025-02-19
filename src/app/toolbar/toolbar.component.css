@@ -1,0 +1,42 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.img-size{
+  width: 15%;
+}
+
+.example-header-image {
+  background-color: #adf3ad;
+  background-size: cover;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  border: #2c9f05 solid 1px;
+}
+.example-header-image:hover{
+  box-shadow: aliceblue 2px 2px;
+  border: lightgreen solid 2px;
+}
