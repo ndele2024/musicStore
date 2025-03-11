@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DataSource} from './dataSource';
 import {Album, Artist, Titre, User} from './model';
-import {ObservedValueOf} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +47,14 @@ export class DataServiceService {
     return this.users.find(user => user.userEmail==email && user.password == password);
   }
 
+
+  getUserById(userId : string|null): User|undefined {
+    if(userId) {
+      return this.users.find(user => user.id === userId);
+    }
+    else {
+      return undefined;
+    }
+  }
 
 }

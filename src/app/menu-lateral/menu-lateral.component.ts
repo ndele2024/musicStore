@@ -1,9 +1,12 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton} from '@angular/material/button';
 import {MatBadge} from '@angular/material/badge';
 import {AuthentificationService} from '../_services/authentification.service';
 import {User} from '../_model/model';
+import {Router} from '@angular/router';
+import {DataServiceService} from '../_model/data-service.service';
+import {UserConnectedService} from '../_services/user-connected.service';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -18,21 +21,51 @@ import {User} from '../_model/model';
 })
 export class MenuLateralComponent {
   private authenticationService = inject(AuthentificationService);
+  private userConnectedService = inject(UserConnectedService);
+  private readonly router = inject(Router);
 
-  getLanguage():string {
+  setContentFilter = output<number>()
+  setTextFilter =output<string>();
+
+  getLanguage():string|null {
     return this.authenticationService.getLanguage;
   }
 
   getIsConnected():boolean {
-    return  this.authenticationService.getIsAuthenticated
+    return  this.authenticationService.getIsAuthenticated;
   }
 
-  getUser():User|undefined {
-    if(this.authenticationService.getIsAuthenticated){
-      return this.authenticationService.getUserConnected
+  getUser():User {
+    return this.userConnectedService.getUser();
+  }
+
+  getNombreSauvegarde() {
+    return this.userConnectedService.getSauvegardeUser().length;
+  }
+
+  getNombrePlaylist(){
+    return this.userConnectedService.getPlaylistUser().length;
+  }
+
+  displayNouveaute(){
+    this.setTextFilter.emit("");
+    this.setContentFilter.emit(1);
+  }
+
+  displayHistorique(){
+    if (this.getIsConnected()){
+      this.setTextFilter.emit("");
+      this.setContentFilter.emit(2);
     }
     else {
-      return undefined;
+      this.router.navigate(['/login']);
     }
   }
+
+  displaySauvegarde() {
+    this.setTextFilter.emit("");
+    this.setContentFilter.emit(3);
+  }
+
+
 }

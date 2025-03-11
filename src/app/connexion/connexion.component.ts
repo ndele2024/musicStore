@@ -10,7 +10,6 @@ import {Router, RouterLink} from '@angular/router';
 import {DataServiceService} from '../_model/data-service.service';
 
 
-
 @Component({
   selector: 'app-connexion',
   imports: [
@@ -51,12 +50,15 @@ export class ConnexionComponent {
     const user =  this.dataService.getUserByEmailAndPassword(this.emailFormControl.value??"", this.passwordFormControl.value??"");
     if(user == undefined){
       this.erorMessage = "Email ou mot de passe invalide";
-      console.log(this.erorMessage);
+      //console.log(this.erorMessage);
     }
     else {
-      this.authenticationService.setUserConnected = user;
-      this.authenticationService.setIsAuthenticated = true;
-      this.router.navigate(['/home/default']);
+      this.authenticationService.setUserConnected = user.id;
+      this.authenticationService.setIsAuthenticated = "true";
+      this.router.navigate(['/home']);
     }
   }
+
+
+
 }

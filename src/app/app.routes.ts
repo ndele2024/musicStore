@@ -8,9 +8,6 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     title: 'Music Space home',
-    children: [
-      {path: 'default', component: MainContentComponent}
-    ],
   },
   {
     path: 'login',
@@ -19,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home/default',
+    redirectTo: 'home',
     pathMatch: 'full'
   }
 ];

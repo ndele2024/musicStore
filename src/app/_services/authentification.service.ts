@@ -1,36 +1,48 @@
 import { Injectable } from '@angular/core';
-import {User} from '../_model/model';
+//import {User} from '../_model/model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
 
-    private isAuthenticated : boolean = false;
-    private userConected : User|undefined = undefined;
-    private language : string = "Francais";
+    //private isAuthenticated : boolean = false;
+    //private userConnected : User|undefined = undefined;
+    //private language : string = "Francais";
 
     get getIsAuthenticated():boolean {
-      return this.isAuthenticated;
+      if (localStorage.getItem("isAuthenticate")){
+        return localStorage.getItem("isAuthenticate") === "true";
+      }
+      else{
+        return false;
+      }
+      //return Boolean(localStorage.getItem("isAuthenticate"));
+      //return this.isAuthenticated;
     }
 
-    set setIsAuthenticated(auth : boolean){
-      this.isAuthenticated = auth;
+    set setIsAuthenticated(auth : string){
+      localStorage.setItem("isAuthenticate", auth);
+      //this.isAuthenticated = auth;
     }
 
-    get getUserConnected():User|undefined {
-      return this.userConected;
+    get getUserConnected():string|null {
+      return  localStorage.getItem("userIdConnected");
+      //return this.userConnected;
     }
 
-    set setUserConnected(user : User | undefined){
-      this.userConected = user;
+    set setUserConnected(userId : string){
+      localStorage.setItem("userIdConnected", userId)
+      //this.userConnected = user;
     }
 
-    get getLanguage():string {
-      return this.language;
+    get getLanguage():string|null {
+      return localStorage.getItem("language");
+      //return this.language;
     }
 
     set setLanguage(lang:string){
-      this.language = lang;
+      localStorage.setItem("language", lang);
+      //this.language = lang;
     }
 }

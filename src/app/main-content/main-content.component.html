@@ -1,19 +1,56 @@
-<h3 class="mt-2">Nouveautés</h3>
-<mat-divider></mat-divider>
-<div class="row">
-  @for (titre of newTitles; track $index){
-    <div class="col mt-4 mx-2">
-      <app-music-card [titre]="titre"></app-music-card>
-    </div>
-  }
-</div>
+@if(textFilter() === ""){
+  @if (contentFilter() === 3){
+    <h3 class="mt-2">Sauvegardes</h3>
+    <mat-divider></mat-divider>
+    <div class="row">
+      @if (getSauvegarde().length===0){
+        <div class="h2 text-danger">Aucune sauvegarde</div>
+      } @else {
+        @for (titre of getSauvegarde(); track titre.id) {
+          <div class="col mt-4 mx-2">
+            <app-music-card [titre]="titre" [param]="'sauvegarde'"></app-music-card>
+          </div>
+        }
+      }
 
-<h3 class="mt-2">Musiques Populaires</h3>
-<mat-divider></mat-divider>
-<div class="row">
-  @for (titre of poularTitles; track $index){
-    <div class="col mt-4 mx-2">
-      <app-music-card [titre]="titre"></app-music-card>
     </div>
+  } @else {
+    <h3 class="mt-2">Nouveautés</h3>
+    <mat-divider></mat-divider>
+    <div class="row">
+
+      @for (titre of newTitles; track titre.id) {
+        <div class="col mt-4 mx-2">
+          <app-music-card [titre]="titre" [param]="'autre'"></app-music-card>
+        </div>
+      }
+    </div>
+
+    @if (contentFilter() === 0){
+      <h3 class="mt-2">Musiques Populaires</h3>
+      <mat-divider></mat-divider>
+      <div class="row">
+        @for (titre of popularTitles; track titre.id){
+          <div class="col mt-4 mx-2">
+            <app-music-card [titre]="titre" [param]="'autre'"></app-music-card>
+          </div>
+        }
+      </div>
+    }
   }
-</div>
+
+} @else {
+  <h3 class="mt-2">Résultat de la recherhe</h3>
+  <mat-divider></mat-divider>
+  <div class="row">
+    @if (filterTitles().length > 0){
+      @for (titre of filterTitles(); track titre.id){
+        <div class="col mt-4 mx-2">
+          <app-music-card [titre]="titre" [param]="'autre'"></app-music-card>
+        </div>
+      }
+    } @else {
+      {{"Aucun titre Trouvé"}}
+    }
+  </div>
+}

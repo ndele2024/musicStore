@@ -1,11 +1,20 @@
-<h2 mat-dialog-title>Ajouter une playlist</h2>
+  <h2 mat-dialog-title>Ajouter une playlist</h2>
 <mat-dialog-content class="align-content-center">
   <mat-form-field appearance="outline">
     <mat-label>nom de la playlist</mat-label>
-    <input matInput width="100%" />
+    <input matInput width="100%" [(ngModel)]="playlistName" />
   </mat-form-field>
+  <mat-error [style]="isplaylistExist()?'display:block;':'display:none;'">
+    Cette playlist existe déjà
+  </mat-error>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Annuler</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+  <button mat-button mat-dialog-close
+          cdkFocusInitial
+          (click)="addPlaylist()"
+          [disabled]="playlistName==='' || isplaylistExist()"
+  >
+    Ok
+  </button>
 </mat-dialog-actions>

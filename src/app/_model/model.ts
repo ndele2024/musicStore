@@ -45,8 +45,10 @@ export class User{
               public role : string
   )
   {
-    this.id = Math.round(Math.random()*1000) + fullname.slice(0, 3) + age;
+    this.id = userName;// Math.round(Math.random()*1000) + fullname.slice(0, 3) + age;
   }
+
+
 
 }
 

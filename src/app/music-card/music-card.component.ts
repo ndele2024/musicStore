@@ -1,20 +1,16 @@
-import {Component, inject, model} from '@angular/core';
+import {Component, inject, Input, input, model} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import {Titre} from '../_model/model';
+import {Titre, User} from '../_model/model';
 import {MatIcon} from '@angular/material/icon';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {
   MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
 } from '@angular/material/dialog';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
 import {DialogAddPlaylistComponent} from '../dialog-add-playlist/dialog-add-playlist.component';
+import {AuthentificationService} from '../_services/authentification.service';
+import {DataServiceService} from '../_model/data-service.service';
+import {UserConnectedService} from '../_services/user-connected.service';
 
 @Component({
   selector: 'app-music-card',
@@ -25,7 +21,15 @@ import {DialogAddPlaylistComponent} from '../dialog-add-playlist/dialog-add-play
 })
 export class MusicCardComponent {
 
-  titre = model.required<Titre>();
+  //injection of authentication service, data service
+  //private authenticationService = inject(AuthentificationService);
+  //private dataService = inject(DataServiceService);
+  private userConnectedService = inject(UserConnectedService);
+
+  titre = input.required<Titre>();
+  param = input.required<string>()
+
+  playlists = this.userConnectedService.getPlaylistUser();
 
   readonly dialog = inject(MatDialog);
 
@@ -35,5 +39,22 @@ export class MusicCardComponent {
     });
   }
 
+  sauvegarderTitre() {
+    this.userConnectedService.addSauvegarde(this.titre());
+  }
+
+  deleteToSauvegarde() {
+    this.userConnectedService.deleteSauvegardeUser(this.titre().id);
+  }
+
+  isInSauvegarde() : boolean {
+    return this.userConnectedService.isTitleSauvegarde(this.titre().id);
+  }
+
+
+  addToPlaylist(nom: string) {
+    this.userConnectedService.adTitleToPlaylist(nom, this.titre());
+    console.log(this.userConnectedService.getPlaylistUser());
+  }
 }
 

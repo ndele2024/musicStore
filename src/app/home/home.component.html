@@ -1,10 +1,10 @@
-<app-toolbar></app-toolbar>
+<app-toolbar (setTextFilter)="setTextFromEvent($event)" (setContentFilter)="setContentFilterFromEvent($event)"></app-toolbar>
 
 <div class="container-sm row m-3">
   <div class="col-sm-2">
-    <app-menu-lateral />
+    <app-menu-lateral (setTextFilter)="setTextFromEvent($event)" (setContentFilter)="setContentFilterFromEvent($event)" />
   </div>
   <div class="col-sm-10">
-    <router-outlet />
+    <app-main-content [textFilter]="textFilter" [contentFilter]="contentFilter" />
   </div>
 </div>

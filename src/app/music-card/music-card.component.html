@@ -9,6 +9,7 @@
     <p>
       {{titre().description}}
     </p>
+    {{titre().annee}}
   </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button [matMenuTriggerFor]="menuPlaylist">
@@ -19,11 +20,25 @@
         <mat-icon>fiber_new</mat-icon>
         playlist
       </button>
-      <button mat-menu-item >Playlist1</button>
+      @for (p of playlists; track p.nom){
+        <button mat-menu-item (click)="addToPlaylist(p.nom)">{{ p.nom }}</button>
+      }
+
     </mat-menu>
 
-    <button mat-icon-button>
+    <button mat-icon-button
+            (click)="sauvegarderTitre()"
+            [class]="param()==='autre'?'display-button':'hidde-button'"
+            [disabled]="isInSauvegarde()"
+    >
       <mat-icon>save</mat-icon>
+    </button>
+
+    <button mat-icon-button
+            (click)="deleteToSauvegarde()"
+            [class]="param()==='sauvegarde'?'display-button':'hidde-button'"
+    >
+      <mat-icon>delete</mat-icon>
     </button>
 
     <button mat-icon-button>

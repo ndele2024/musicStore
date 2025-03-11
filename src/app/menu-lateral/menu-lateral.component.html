@@ -1,31 +1,31 @@
 <div class="mt-5">
 
   <div class="m-2">
-    <button mat-button>
+    <button mat-button (click)="displayNouveaute()">
       <mat-icon>fiber_new</mat-icon>
       Nouveauté
     </button>
   </div>
   <div class="m-2">
-    <button mat-button>
+    <button mat-button (click)="displayHistorique()">
       <mat-icon>history</mat-icon>
       Historique
     </button>
   </div>
   @if(getIsConnected()){
     <div class="m-2">
-      <button mat-button>
-        <mat-icon matBadge="0" matBadgeOverlap="false" matBadgePosition="before">save</mat-icon>
+      <button mat-button (click)="displaySauvegarde()">
+        <mat-icon [matBadge]="getNombreSauvegarde()" matBadgeOverlap="false" matBadgePosition="before">save</mat-icon>
         Sauvegardes
       </button>
     </div>
     <div class="m-2">
       <button mat-button>
-        <mat-icon matBadge="0" matBadgeOverlap="false" matBadgePosition="before">queue_music</mat-icon>
+        <mat-icon [matBadge]="getNombrePlaylist()" matBadgeOverlap="false" matBadgePosition="before">queue_music</mat-icon>
         Playlist
       </button>
     </div>
-    @if(getUser()?.role === "artist"){
+    @if(getUser().role === "artist"){
       <div class="m-2">
         <button mat-button>
           <mat-icon>list</mat-icon>

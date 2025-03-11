@@ -3,7 +3,12 @@
 }
 
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url('/ressources/icon-musique.png');
+  background-size: cover;
+}
+
+.example-header-image1 {
+  background-image: url('/ressources/icon-playlist.png');
   background-size: cover;
 }
 
@@ -11,4 +16,12 @@
   background-color: lightgreen;
   transform: scale(115%);
   transition: 150ms ease-in-out;
+}
+
+.display-button{
+  display: block;
+}
+
+.hidde-button{
+  display: none;
 }

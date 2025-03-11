@@ -9,12 +9,12 @@
       Menu
     </button>
     <mat-menu #mainMenu="matMenu">
-      <button mat-menu-item >Nouveauté</button>
-      <button mat-menu-item >Historique</button>
+      <button mat-menu-item (click)="displayNouveaute()">Nouveauté</button>
+      <button mat-menu-item (click)="displayHistorique()">Historique</button>
       @if(getIsConnected()){
-        <button mat-menu-item >Sauvegardes</button>
+        <button mat-menu-item (click)="displaySauvegarde()" >Sauvegardes</button>
         <button mat-menu-item >Playlists</button>
-        @if(getUser()?.role === "artist"){
+        @if(getUser().role === "artist"){
           <button mat-menu-item >Gerer vos titres</button>
         }
       }
@@ -22,10 +22,10 @@
   </div>
 
   <div class="">
-      <a mat-button routerLink="/home">
+      <button mat-button (click)="goToHome()">
         <mat-icon>home</mat-icon>
         Accueil
-      </a>
+      </button>
   </div>
 
   <span class="example-spacer"></span>
@@ -34,8 +34,8 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Titre, Artiste ...</mat-label>
-        <input matInput />
-        <button matSuffix mat-icon-button aria-label="Search">
+        <input matInput [(ngModel)]="textFilter"/>
+        <button matSuffix mat-icon-button aria-label="Search" (click)="setTextFilterEvent()">
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
@@ -70,12 +70,12 @@
       </div>
       <mat-menu #userProfile="matMenu">
         <button mat-menu-item>MonProfil</button>
-        <button mat-menu-item (click)="deconnexion()">Deconnexion</button>
+        <button mat-menu-item (click)="deconnexion($event)">Deconnexion</button>
       </mat-menu>
     </div>
   }
   <div class="m-3">
-    <button mat-button mat-stroked-button [matMenuTriggerFor]="menu">{{getLanguage()}}</button>
+    <button mat-button mat-stroked-button [matMenuTriggerFor]="menu">{{getLanguage()??defaultLanguage}}</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="changeLanguage('Francais')">Francais</button>
       <button mat-menu-item (click)="changeLanguage('Anglais')">Anglais</button>
