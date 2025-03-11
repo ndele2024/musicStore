@@ -62,6 +62,7 @@ export class DataSource{
   }
 
   getUsers():Observable<ObservedValueOf<User[]>>{
+    this.users.push(new User("default user", 0, "MF", "defaultUser", "defaultUser@example.com", "default", "visiteur"));
     // Generating 2 Users
     for (let i = 1; i <= 2; i++) {
       this.users.push(new User(

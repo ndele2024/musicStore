@@ -27,8 +27,8 @@ export class ToolbarComponent {
   private readonly router = inject(Router);
 
   defaultLanguage = "Francais";
-  avatarName = (this.getUser().fullname.slice(0, 2));
-  avatarUrl = this.getUser().avatar;
+  avatarName = this.userConnectedService.getUser().fullname.slice(0, 2);
+  avatarUrl = this.userConnectedService.getUser().avatar;
 
   textFilter: string = '';
   setTextFilter =output<string>();
