@@ -33,7 +33,7 @@ export class DataSource{
     for (let i = 1; i <= 10; i++) {
       this.albums.push(new Album(
         `Album${i}`,
-        2000 + (i % 21), // years between 2000 and 2020
+        2000 + (i % 21), // years between 2000 and 2005
         this.titres.slice(i * 5, (i + 1) * 5) // 5 titres per album
       ));
     }

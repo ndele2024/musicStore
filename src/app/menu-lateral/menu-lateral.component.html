@@ -1,4 +1,10 @@
 <div class="mt-5">
+  <div class="m-2">
+    <button mat-button (click)="goToHome()">
+      <mat-icon>home</mat-icon>
+      Accueil
+    </button>
+  </div>
 
   <div class="m-2">
     <button mat-button (click)="displayNouveaute()">
@@ -20,8 +26,14 @@
       </button>
     </div>
     <div class="m-2">
-      <button mat-button>
-        <mat-icon [matBadge]="getNombrePlaylist()" matBadgeOverlap="false" matBadgePosition="before">queue_music</mat-icon>
+      <button mat-button (click)="displayPlaylist()">
+        <mat-icon
+          [matBadge]="getNombrePlaylist()"
+          matBadgeOverlap="false"
+          matBadgePosition="before"
+        >
+          queue_music
+        </mat-icon>
         Playlist
       </button>
     </div>

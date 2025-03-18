@@ -2,7 +2,7 @@
 <mat-dialog-content class="align-content-center">
   <mat-form-field appearance="outline">
     <mat-label>nom de la playlist</mat-label>
-    <input matInput width="100%" [(ngModel)]="playlistName" />
+    <input matInput width="100%" [(ngModel)]="playlistName" (keydown)="handleEnter($event.code)"/>
   </mat-form-field>
   <mat-error [style]="isplaylistExist()?'display:block;':'display:none;'">
     Cette playlist existe déjà

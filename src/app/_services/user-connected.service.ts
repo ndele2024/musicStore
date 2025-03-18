@@ -31,7 +31,7 @@ export class UserConnectedService {
     this.userConnected.sauvegardes = this.userConnected.sauvegardes.filter(t => t.id !== titleId);
   }
 
-  isTitleSauvegarde(titleId : string) {
+  isTitleInSauvegarde(titleId : string) {
     let i = 0;
     this.userConnected.sauvegardes.forEach(t => {
       if (t.id === titleId) i++;
@@ -59,10 +59,18 @@ export class UserConnectedService {
     return i > 0;
   }
 
-  adTitleToPlaylist(plalistName:string, titre : Titre){
-    const index = this.userConnected.playlists.findIndex(p => p.nom === plalistName);
+  addTitleToPlaylist(playlistName:string, titre : Titre){
+    const index = this.userConnected.playlists.findIndex(p => p.nom === playlistName);
     this.userConnected.playlists.at(index)?.titres.push(titre);
   }
+
+  deleteTitleToPlaylist(playlistName:string, titre : Titre) {
+    const index = this.userConnected.playlists.findIndex(p => p.nom === playlistName);
+    if (index !== -1) {
+      this.userConnected.playlists[index].titres = this.userConnected.playlists[index].titres.filter(t => t.id == titre.id)
+    }
+  }
+
 
 
 }

@@ -1,6 +1,22 @@
 @if(textFilter() === ""){
-  @if (contentFilter() === 3){
-    <h3 class="mt-2">Sauvegardes</h3>
+  @if (contentFilter() === 4){
+    <h3 class="mt-3">Playlist</h3>
+    <mat-divider></mat-divider>
+    <div class="row">
+      @if (getPlaylists().length===0){
+        <div class="h2 text-danger">Aucune playlist</div>
+      } @else {
+        @for (playlist of getPlaylists(); track playlist.nom) {
+          <div class="col mt-4 mx-2">
+            <app-playlist-card [playlist]="playlist" [param]="'playlist'"></app-playlist-card>
+          </div>
+        }
+      }
+
+    </div>
+
+  } @else if (contentFilter() === 3){
+    <h3 class="mt-3">Sauvegardes</h3>
     <mat-divider></mat-divider>
     <div class="row">
       @if (getSauvegarde().length===0){
@@ -14,8 +30,24 @@
       }
 
     </div>
+
+  } @else if (contentFilter()===2){
+    <h3 class="mt-3">Historique de lecture</h3>
+    <mat-divider></mat-divider>
+    <div class="row">
+      @if (getHistorique().length===0){
+        <div class="h2 text-danger">Aucune historique de lecture</div>
+      } @else {
+        @for (titre of getHistorique(); track $index) {
+          <div class="col mt-4 mx-2">
+            <app-music-card [titre]="titre" [param]="'sauvegarde'"></app-music-card>
+          </div>
+        }
+      }
+    </div>
+
   } @else {
-    <h3 class="mt-2">Nouveautés</h3>
+    <h3 class="mt-3">Nouveautés</h3>
     <mat-divider></mat-divider>
     <div class="row">
 
@@ -27,7 +59,7 @@
     </div>
 
     @if (contentFilter() === 0){
-      <h3 class="mt-2">Musiques Populaires</h3>
+      <h3 class="mt-3">Musiques Populaires</h3>
       <mat-divider></mat-divider>
       <div class="row">
         @for (titre of popularTitles; track titre.id){
@@ -36,17 +68,54 @@
           </div>
         }
       </div>
+      <h3 class="mt-3">Albums</h3>
+      <mat-divider></mat-divider>
+      <div class="row">
+        @for (album of getAlbums(); track album.name){
+          <div class="col mt-4 mx-2">
+            <app-playlist-card [album]="album" [param]="'album'"></app-playlist-card>
+          </div>
+        }
+      </div>
     }
   }
 
 } @else {
-  <h3 class="mt-2">Résultat de la recherhe</h3>
+  <p class="mt-2 text-decoration-underline">Résultat de la recherhe</p>
+  <h3 class="mt-3">Titres</h3>
   <mat-divider></mat-divider>
   <div class="row">
     @if (filterTitles().length > 0){
       @for (titre of filterTitles(); track titre.id){
         <div class="col mt-4 mx-2">
           <app-music-card [titre]="titre" [param]="'autre'"></app-music-card>
+        </div>
+      }
+
+    } @else {
+      {{"Aucun titre Trouvé"}}
+    }
+  </div>
+  <h3 class="mt-3">Albums</h3>
+  <mat-divider></mat-divider>
+  <div class="row">
+    @if (filterAlbums().length > 0){
+      @for (album of filterAlbums(); track album.name){
+        <div class="col mt-4 mx-2">
+          <app-playlist-card [album]="album" [param]="'album'"></app-playlist-card>
+        </div>
+      }
+    } @else {
+      {{"Aucun titre Trouvé"}}
+    }
+  </div>
+  <h3 class="mt-3">Playlist</h3>
+  <mat-divider></mat-divider>
+  <div class="row">
+    @if (filterPlaylists().length > 0){
+      @for (playlist of filterPlaylists(); track playlist.nom){
+        <div class="col mt-4 mx-2">
+          <app-playlist-card [playlist]="playlist" [param]="'playlist'"></app-playlist-card>
         </div>
       }
     } @else {

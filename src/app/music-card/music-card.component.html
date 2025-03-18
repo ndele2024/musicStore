@@ -21,7 +21,7 @@
         playlist
       </button>
       @for (p of playlists; track p.nom){
-        <button mat-menu-item (click)="addToPlaylist(p.nom)">{{ p.nom }}</button>
+        <button mat-menu-item (click)="addToPlaylist(p.nom)" [disabled]="isInPlaylist(p)">{{ p.nom }}</button>
       }
 
     </mat-menu>

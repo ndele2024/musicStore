@@ -67,5 +67,15 @@ export class MenuLateralComponent {
     this.setContentFilter.emit(3);
   }
 
+  displayPlaylist() {
+    this.setTextFilter.emit("");
+    this.setContentFilter.emit(4);
+  }
+
+  goToHome() {
+    this.setTextFilter.emit("");
+    this.setContentFilter.emit(0);
+    this.router.navigate(['/home']);
+  }
 
 }

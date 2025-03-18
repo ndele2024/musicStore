@@ -1,6 +1,5 @@
 import {Component, inject} from '@angular/core';
 import {
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -12,6 +11,7 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {UserConnectedService} from '../_services/user-connected.service';
 import {FormsModule} from '@angular/forms';
+import {NotificationService} from '../_services/notification.service';
 
 @Component({
   selector: 'app-dialog-add-playlist',
@@ -23,6 +23,7 @@ import {FormsModule} from '@angular/forms';
 export class DialogAddPlaylistComponent {
   readonly dialogRef = inject(MatDialogRef<DialogAddPlaylistComponent>);
   private userConnectedService = inject(UserConnectedService);
+  private notificationService = inject(NotificationService);
 
   playlistName="";
 
@@ -32,5 +33,13 @@ export class DialogAddPlaylistComponent {
 
   isplaylistExist(){
     return this.userConnectedService.isPlaylistNameExist(this.playlistName);
+  }
+
+  handleEnter(code: string) {
+    if (code === "Enter" && !this.isplaylistExist()){
+      this.addPlaylist();
+      this.dialogRef.close();
+      this.notificationService.show(this.playlistName+" a été ajouter aux playlists")
+    }
   }
 }

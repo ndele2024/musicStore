@@ -34,7 +34,8 @@ export class ToolbarComponent {
   setTextFilter =output<string>();
   setContentFilter = output<number>();
 
-  setTextFilterEvent(){
+  setTextFilterEvent(event: string){
+    this.textFilter = event;
     this.setTextFilter.emit(this.textFilter);
     //console.log(`texte saisit : ${this.textFilter}`)
   }
@@ -93,5 +94,13 @@ export class ToolbarComponent {
     this.setContentFilter.emit(3);
   }
 
+  resetFilter() {
+    this.textFilter = "";
+    this.setTextFilter.emit("");
+  }
 
+  displayPlaylists() {
+    this.setTextFilter.emit("");
+    this.setContentFilter.emit(4);
+  }
 }

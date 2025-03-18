@@ -13,7 +13,7 @@
       <button mat-menu-item (click)="displayHistorique()">Historique</button>
       @if(getIsConnected()){
         <button mat-menu-item (click)="displaySauvegarde()" >Sauvegardes</button>
-        <button mat-menu-item >Playlists</button>
+        <button mat-menu-item (click)="displayPlaylists()">Playlists</button>
         @if(getUser().role === "artist"){
           <button mat-menu-item >Gerer vos titres</button>
         }
@@ -34,9 +34,12 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Titre, Artiste ...</mat-label>
-        <input matInput [(ngModel)]="textFilter"/>
-        <button matSuffix mat-icon-button aria-label="Search" (click)="setTextFilterEvent()">
-          <mat-icon>search</mat-icon>
+        <input matInput [ngModel]="textFilter" (ngModelChange)="setTextFilterEvent($event)" />
+        <button matSuffix mat-icon-button aria-label="Search" (click)="resetFilter()">
+          @if (textFilter!==""){
+            <mat-icon>close</mat-icon>
+          }
+
         </button>
       </mat-form-field>
     </div>
