@@ -1,0 +1,38 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title class="text-decoration-underline cursor" (click)="goToPlaylistDetail()">
+      {{param()==='playlist'? playlist()?.nom : album()?.name}}
+    </mat-card-title>
+    <mat-card-subtitle>{{param()==='album'? album()?.annee:''}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="cursor" (click)="goToPlaylistDetail()">
+    <p class="text-decoration-underline">
+      {{param()==='playlist'? playlist()?.titres?.length??0 : album()?.titres?.length??0}} titre(s)
+    </p>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-icon-button
+            [class]="param()==='album'?'display-button':'hidde-button'"
+            (click)="saveAlbum()"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+
+    <button mat-icon-button
+            [class]="param()==='playlist'?'display-button':'hidde-button'"
+            (click)="deletePlaylist()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <button mat-icon-button>
+      <mat-icon>play_circle</mat-icon>
+    </button>
+
+
+  </mat-card-actions>
+</mat-card>

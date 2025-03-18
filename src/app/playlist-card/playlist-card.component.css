@@ -1,0 +1,41 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('/ressources/icon-playlist.png');
+  background-size: cover;
+}
+
+.example-card:hover{
+  background-color: lightgreen;
+  transform: scale(115%);
+  transition: 150ms ease-in-out;
+}
+
+.display-button{
+  display: block;
+}
+
+.hidde-button{
+  display: none;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+.error{
+  color: #310202;
+  background-color: #ee5050;
+}
+
+.success{
+  color : darkgreen;
+  background-color: lightgreen;
+}
+
+.info{
+  color: blue;
+  background-color: lightblue;
+}
